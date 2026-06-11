@@ -8,7 +8,10 @@ app = FastAPI(
     version="1.0.0"
 )
 
-create_tables()
+@app.on_event("startup")
+def startup():
+    create_tables()
+
 app.include_router(tasks.router)
 
 @app.get("/")
